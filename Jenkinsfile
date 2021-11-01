@@ -1,8 +1,13 @@
 pipeline {
     agent any
     parameters {
-        string(name: 'Environment', defaultValue: 'prod', description: 'Environemnt')
+        string(name: 'Environment', defaultValue: 'dev', description: 'Environemnt')
     }
+
+    environment {
+        ARM_USE_MSI = 'true'
+    }
+
     stages {
         stage('Init') {
             steps {

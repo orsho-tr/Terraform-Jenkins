@@ -11,7 +11,7 @@ terraform {
   }
 
   backend "azurerm" {
-    resource_group_name  = "or-project-terraform"
+    resource_group_name  = "orTerraform"
     storage_account_name = "orterraformstate"
     container_name       = "prod-state"
     key                  = "terraform.tfstate"
