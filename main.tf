@@ -198,14 +198,10 @@ resource "azurerm_lb_rule" "lbnatrule" {
   probe_id                       = azurerm_lb_probe.vm.id
 }
 
-data "azurerm_key_vault" "kv" {
+data "azurerm_key_vault" "main" {
   name                = "orKeyVault20"
-  location            = "eastus"
   resource_group_name = "orTerraform"
-  tenant_id           = "812aea3a-56f9-4dcb-81f3-83e61357076e"
-  sku_name            = "standard"
 }
-
 # Set access policies to the vm
 resource "azurerm_key_vault_access_policy" "accessPolicies" {
   count        = var.numberOfInstances
