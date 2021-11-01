@@ -270,23 +270,22 @@ resource "azurerm_public_ip" "subnetIP" {
 #   }
 # }
 
-resource "null_resource" "example_provisioner" {
-  provisioner "remote-exec" {
-    inline = [
-      "echo ${data.azurerm_key_vault_secret.kvsecret.value} >> /home/testadmin/.ssh/id_rsa"
-    ]
+#resource "null_resource" "example_provisioner" {
+ # provisioner "remote-exec" {
+  #  inline = [
+   #   "echo ${data.azurerm_key_vault_secret.kvsecret.value} >> /home/testadmin/.ssh/id_rsa"
+    #]
 
-    connection {
-      type = "ssh"
-      user = "testadmin"
+    #connection {
+     # type = "ssh"
+      #user = "testadmin"
       #host     = azurerm_network_interface.networkInterface[count.index].private_ip_address
-      host = "23.0.0.5"
-      bastion_host = "13.90.255.58"
-      #bastion_host = azurerm_public_ip.subnetIP.ip_address
-      private_key = file("C:\\Users\\orsho\\.ssh\\id_rsa")
-    }
-  }
-}
+      #host = "23.0.0.5"
+      #bastion_host = "13.90.255.58"
+     # private_key = file("C:\\Users\\orsho\\.ssh\\id_rsa")
+    #}
+  #}
+#}
 
 
 
