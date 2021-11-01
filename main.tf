@@ -128,7 +128,7 @@ resource "azurerm_virtual_machine" "main" {
   os_profile_linux_config {
     disable_password_authentication = true
     ssh_keys {
-      key_data = data.azurerm_key_vault_secret.public.value
+      key_data = data.azurerm_key_vault_secret.main.value
       path     = "/home/testadmin/.ssh/authorized_keys"
     }
   }
@@ -199,9 +199,9 @@ resource "azurerm_lb_rule" "lbnatrule" {
 }
 
 resource "azurerm_key_vault" "kv" {
-  name                = "orKeyVault19"
+  name                = "orKeyVault20"
   location            = "eastus"
-  resource_group_name = "or_project"
+  resource_group_name = "orTerraform"
   tenant_id           = "812aea3a-56f9-4dcb-81f3-83e61357076e"
   sku_name            = "standard"
 }
@@ -218,22 +218,21 @@ resource "azurerm_key_vault_access_policy" "accessPolicies" {
   ]
 }
 
-resource "azurerm_key_vault_secret" "example" {
-  name         = "ssh-key"
-  value        = file("C:\\Users\\orsho\\.ssh\\id_rsa")
-  key_vault_id = azurerm_key_vault.kv.id
-}
+#resource "azurerm_key_vault_secret" "example" {
+  #name         = "ssh-key"
+ # value        = file("C:\\Users\\orsho\\.ssh\\id_rsa")
+  #key_vault_id = azurerm_key_vault.kv.id
+#}
 
-resource "azurerm_key_vault_secret" "public" {
+data "azurerm_key_vault_secret" "main" {
   name         = "ssh-public-key"
-  value        = file("C:\\Users\\orsho\\.ssh\\id_rsa.pub")
-  key_vault_id = azurerm_key_vault.kv.id
+  key_vault_id = data.azurerm_key_vault.kv.id
 }
 
-data "azurerm_key_vault_secret" "kvsecret" {
-  name         = "ssh-key" // Name of secret
-  key_vault_id = azurerm_key_vault.kv.id
-}
+#data "azurerm_key_vault_secret" "kvsecret" {
+ # name         = "ssh-key" // Name of secret
+  #key_vault_id = azurerm_key_vault.kv.id
+#}
 
 # resource "azurerm_virtual_machine_extension" "test" {
 #   count                = var.numberOfInstances
