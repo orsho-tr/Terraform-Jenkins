@@ -198,7 +198,7 @@ resource "azurerm_lb_rule" "lbnatrule" {
   probe_id                       = azurerm_lb_probe.vm.id
 }
 
-resource "azurerm_key_vault" "kv" {
+data "azurerm_key_vault" "kv" {
   name                = "orKeyVault20"
   location            = "eastus"
   resource_group_name = "orTerraform"
