@@ -1,13 +1,14 @@
 pipeline {
     agent any
     parameters {
-        string(name: 'Environment', defaultValue: 'staging', description: 'Environemnt')
+        string(name: 'Environment', defaultValue: 'prod', description: 'Environemnt')
     }
 
     environment {
         ARM_USE_MSI = 'true'
         ARM_SUBSCRIPTION_ID = '0df0b217-e303-4931-bcbf-af4fe070d1ac'
         ARM_TENANT_ID = '812aea3a-56f9-4dcb-81f3-83e61357076e'
+        GOOGLE_CHAT_URL = 'https://chat.googleapis.com/v1/spaces/AAAA2NbUb4k/messages?key=AIzaSyDdI0hCZtE6vySjMm-WEfRq3CPzqKqqsHI&token=yb6Kh6ho0fFNVClLvcf2k7I3fIUqVQUxND52Bvzt6Ag%3D'
     }
 
     stages {
@@ -28,21 +29,31 @@ pipeline {
         }
         stage('Deploy approval') {
             steps {
-                if (params.Environment == 'prod') {
-                     input "Deploy to prod?"
-                } else {
-                     echo 'Deploying to staging'
-                 }
+                    if (params.Environment == "prod") {
+                       input "Deploy to prod?"
+                    } else {
+                        echo 'Deploying to staging'
+                    }
+               }
             }
         }
         stage('Apply') {
             steps {
-                    if (params.Environment == 'prod') {
+                 script {
+                    if (params.Environment == "prod") {
                         echo 'I only execute on the master branch'
                     } else {
                         echo 'I execute elsewhere'
                     }
-               }
+                }
+            }
+        }
+        @Library('jenkins-google-chat-notification') _
+        stage('Notification') {
+            sendGoogleChat("Build Successfully " +
+                "with a <https://github.com/mkutz/jenkins-google-chat-notification|link>" +
+                "\nand a line break, " +
+                ":)")
         }
     }
- }
+}
