@@ -35,7 +35,6 @@ pipeline {
                         echo 'Deploying to staging'
                     }
                }
-            }
         }
         stage('Apply') {
             steps {
