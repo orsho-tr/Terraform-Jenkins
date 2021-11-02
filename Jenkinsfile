@@ -1,7 +1,7 @@
 pipeline {
     agent any
     parameters {
-        string(name: 'Environment', defaultValue: 'prod', description: 'Environemnt')
+        string(name: 'Environment', defaultValue: 'staging', description: 'Environemnt')
     }
 
     environment {
