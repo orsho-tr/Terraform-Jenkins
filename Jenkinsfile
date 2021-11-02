@@ -53,6 +53,5 @@ pipeline {
                 sh """ googlechatnotification url: 'https://chat.googleapis.com/v1/spaces/AAAA2NbUb4k/messages?key=AIzaSyDdI0hCZtE6vySjMm-WEfRq3CPzqKqqsHI&token=yb6Kh6ho0fFNVClLvcf2k7I3fIUqVQUxND52Bvzt6Ag%3D', message: 'Successfull', notifyAborted: 'true', notifyFailure: 'true', notifyNotBuilt: 'true', notifySuccess: 'true', notifyUnstable: 'true', notifyBackToNormal: 'true', suppressInfoLoggers: 'true', sameThreadNotification: 'true' """
                }
             }
-        }
     }
 }
