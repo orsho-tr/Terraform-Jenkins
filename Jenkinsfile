@@ -29,12 +29,14 @@ pipeline {
         }
         stage('Deploy approval') {
             steps {
+                script {
                     if (params.Environment == "prod") {
                        input "Deploy to prod?"
                     } else {
                         echo 'Deploying to staging'
                     }
                }
+           }
         }
         stage('Apply') {
             steps {
