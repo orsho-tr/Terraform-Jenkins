@@ -59,6 +59,7 @@ pipeline {
                    message: 'Shoshana',
                    sameThreadNotification: true,
                    suppressInfoLoggers: true
+               )
             }
         }
     }
