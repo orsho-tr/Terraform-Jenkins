@@ -28,25 +28,21 @@ pipeline {
         }
         stage('Deploy approval') {
             steps {
-                script {
-                    if (params.Environment == 'prod') {
-                       input "Deploy to prod?"
-                    } else {
-                        echo 'Deploying to staging'
-                    }
-               }
+                if (params.Environment == 'prod') {
+                     input "Deploy to prod?"
+                } else {
+                     echo 'Deploying to staging'
+                 }
             }
         }
         stage('Apply') {
             steps {
-                 script {
                     if (params.Environment == 'prod') {
                         echo 'I only execute on the master branch'
                     } else {
                         echo 'I execute elsewhere'
                     }
-                }
-            }
+               }
         }
     }
-}
+ }
