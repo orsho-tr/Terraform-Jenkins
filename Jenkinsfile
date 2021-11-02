@@ -43,8 +43,11 @@ pipeline {
                  script {
                     if (params.Environment == "prod") {
                         echo 'I only execute on the master branch'
+                        //sh """ terraform apply --var-file ${params.Environment}.tfvars --auto-aprove """
                     } else {
-                        echo 'I execute elsewhere'
+                        //sh """ terraform apply --var-file ${params.Environment}.tfvars --auto-aprove """
+                        echo 'I apply in somewhere else'
+
                     }
                 }
             }
