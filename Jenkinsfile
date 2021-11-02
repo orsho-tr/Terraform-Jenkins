@@ -54,15 +54,8 @@ pipeline {
                googlechatnotification (
                    url: "https://chat.googleapis.com/v1/spaces/AAAALrF97Rs/messages?key=AIzaSyDdI0hCZtE6vySjMm-WEfRq3CPzqKqqsHI&token=JjxLuuMHJBwdIeAYRD2z6G0xwXF5AuMyCqESoNhBEAg%3D",
                    message: 'Shoshana',
-                   notifyAborted: 'true',
-                   notifyFailure: 'true',
-                   notifyNotBuilt: 'true',
-                   notifySuccess: 'true',
-                   notifyUnstable: 'true',
-                   notifyBackToNormal: 'true',
-                   suppressInfoLoggers: 'true',
-                   sameThreadNotification: 'true'
-               )   
+                   sameThreadNotification: true,
+                   suppressInfoLoggers: true
             }
         }
     }
