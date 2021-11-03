@@ -59,6 +59,7 @@ jobs:
       ARM_CLIENT_SECRET: ${{ secrets.AZURE_AD_CLIENT_SECRET }}
       ARM_TENANT_ID: ${{ secrets.AZURE_TENANTID }}
       ARM_SUBSCRIPTION_ID: ${{ secrets.AZURE_SUBSCRIPTIONID }}
+      envir: 'prod'
     
     # Use the Bash shell regardless whether the GitHub Actions runner is ubuntu-latest, macos-latest, or windows-latest
     defaults:
@@ -80,6 +81,6 @@ jobs:
       id: validate
       run: terraform validate
     
-    # - name: Terraform Plan
-    #   id: plan
-    #   run: terraform plan
+    - name: Terraform Plan
+      id: plan
+      run: terraform plan --var-file ${{env.envir}}.tfvars
